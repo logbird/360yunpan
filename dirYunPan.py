@@ -108,6 +108,9 @@ class dirYunPan:
         )
         reqArgs.add_header("Referer", "http://c21.yunpan.360.cn/my/index/");
         result = urllib2.urlopen(reqArgs).read()
+        result = json.loads(result)
+        # 这里需要做一些验证
+        result = urllib2.urlopen(result['data']['download_url']).read();
         fname = self.pathYunPan + fname
         fname = fname.decode()
         if utilsYunPan.isText(result[0:512]):
