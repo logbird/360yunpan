@@ -53,6 +53,52 @@ class dirYunPan:
             print 'Fetch Free Space Size Error! Message: '+ result['errmsg']
             sys.exit()
 
+    def offlineList(self):
+        '''获取离线下载列表
+        '''
+        url = self.serverAddr + "/offline/getOfflineTaskList"
+        args = {
+            'ajax' : '1',
+        }
+        args = urllib.urlencode(args)
+        reqArgs  = urllib2.Request(
+            url = url,
+            data = args
+        )
+        reqArgs.add_header("Referer", self.serverAddr + "/my/index/");
+        result = urllib2.urlopen(reqArgs).read()
+        result = utilsYunPan.jsonRepair(result)
+        result = json.loads(result)
+        if result['errno'] == 0:
+            return result['data']
+        else:
+            print 'Get Offline Tast List Err! Message: '+ result['errmsg']
+            sys.exit()
+
+    def offlineDownload(self, offurl):
+        '''离线下载
+        '''
+        url = self.serverAddr + "/offline/offlineDownload"
+        args = {
+            'ajax' : '1',
+            'url' : offurl,
+        }
+        args = urllib.urlencode(args)
+        reqArgs  = urllib2.Request(
+            url = url,
+            data = args
+        )
+        reqArgs.add_header("Referer", self.serverAddr + "/my/index/");
+        result = urllib2.urlopen(reqArgs).read()
+        result = utilsYunPan.jsonRepair(result)
+        result = json.loads(result)
+        if result['errno'] == 0:
+            return result['data']
+        else:
+            print 'Create Offline Tast Err! Message: '+ result['errmsg']
+            sys.exit()
+
+
     def ls(self, path = '/'):
         '''获取path目录下的文件列表
 
@@ -79,7 +125,7 @@ class dirYunPan:
         #result = open(sys.path[0] + '/dir.dat').read()
         result = utilsYunPan.jsonRepair(result)
         result = json.loads(result)
-        if result['errno'] == '0':
+        if result['errno'] == 0:
             return result['data']
         else:
             print 'Get Dir List Error, Please try again later! Message: '+ result['errmsg']

@@ -27,13 +27,15 @@ from downloadYunPan import downloadManager
 
 if __name__ == '__main__':
     login = loginYunPan()
-    # 输入用户名密码
-    userinfo = login.run('用户名', '..密码')
-    # 文件保存目录
-    pathYunPan = 'E:/testyun'
+    userinfo = login.run('用户名', '密码')
+    pathYunPan = '~/test/'
     dir = dirYunPan(pathYunPan, login.serverAddr)
     # 需要下载的云盘路径
     tree = dir.downloadDirTree('/', True)
     downloadManager.pushQueue(tree)
     # 设置线程数
     downloadManager.start(dir, 10)
+    # 离线下载
+    #result = dir.offlineDownload("http://todeer.sinaapp.com/include/lib/js/common_tpl.js");
+    # 获取离线下载列表
+    #result = dir.offlineList();
