@@ -1,4 +1,4 @@
-#!/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf8 -*-
 """
 main.py
@@ -58,10 +58,11 @@ def offlineDownload(loginObj, url):
 def offlineList(loginObj):
     dir = dirYunPan('/', loginObj.serverAddr)
     result = dir.offlineList();
-    list = []
-    if result.hash_key('offline_task_list'):
-        list = result.offline_task_list
-    print list
+    task_list = {}
+    if result.has_key('offline_task_list'):
+        task_list = result['offline_task_list']
+    for i in task_list:
+        print "%s\t%s\t%s" % (i['status'], i['task_id'], i['url'])
 
 def runCommand(conf, user, pwd):
     try:
