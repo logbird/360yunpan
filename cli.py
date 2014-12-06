@@ -53,7 +53,7 @@ def login(user, pwd):
 def offlineDownload(loginObj, url):
     dir = dirYunPan('/', loginObj.serverAddr)
     result = dir.offlineDownload("http://todeer.sinaapp.com/include/lib/js/common_tpl.js");
-    print result
+    print result['task_id']
 
 def offlineList(loginObj):
     dir = dirYunPan('/', loginObj.serverAddr)
