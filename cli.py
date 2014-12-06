@@ -86,8 +86,8 @@ def runCommand(conf, user, pwd):
 
 
 if __name__ == '__main__':
-    username = 'lihaohc@126.com'
-    password = 'lihao123'
+    username = '账号'
+    password = '密码'
     # 初始化 命令行参数
     conf = runCommand(conf, username, password)
     sys.exit()
