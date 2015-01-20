@@ -73,12 +73,12 @@ class loginYunPan():
         result = result.strip(' ')
         result = json.loads(result[5:-1])
         token = ''
-        if result['errno'] == 0:
+        if int(result['errno']) == 0:
             print 'getToken Success'
             token = result['token']
             self.cookie_jar.save(self.cookieFile, ignore_discard=True, ignore_expires=True)
         else:
-            print 'getToken Failed, Errno:' + result['errno']
+            print 'getToken Failed, Errno:' + str(result['errno'])
             sys.exit()
         return token
 
@@ -112,13 +112,13 @@ class loginYunPan():
         result = result.replace("\n", '').strip(' ')
         result = json.loads(result[5:-1])
         userinfo = {}
-        if result['errno'] == 0:
+        if int(result['errno']) == 0:
             print 'Login Success'
             userinfo = result['userinfo']
             open(self.userFile, 'w').write(json.dumps(userinfo))
             self.cookie_jar.save(self.cookieFile, ignore_discard=True, ignore_expires=True)
         else:
-            print 'Login Failed, Errno:' + result['errno']
+            print 'Login Failed, please check your password in cli.py or main.py, Errno:' + str(result['errno'])
             sys.exit()
         return userinfo
 

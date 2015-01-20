@@ -42,7 +42,7 @@ class dirYunPan:
         url = self.serverAddr + "/user/getsize/?t=1377829621254&ajax=1"
         result = urllib2.urlopen(url).read()
         result = json.loads(result)
-        if result['errno'] == 0:
+        if int(result['errno']) == 0:
             size = {}
             size['total'] = long(result['data']['total_size'])
             size['used'] = long(result['data']['used_size'])
@@ -69,7 +69,7 @@ class dirYunPan:
         result = urllib2.urlopen(reqArgs).read()
         result = utilsYunPan.jsonRepair(result)
         result = json.loads(result)
-        if result['errno'] == 0:
+        if int(result['errno']) == 0:
             return result['data']
         else:
             print 'Get Offline Tast List Err! Message: '+ result['errmsg']
@@ -92,7 +92,7 @@ class dirYunPan:
         result = urllib2.urlopen(reqArgs).read()
         result = utilsYunPan.jsonRepair(result)
         result = json.loads(result)
-        if result['errno'] == 0:
+        if int(result['errno']) == 0:
             return result['data']
         else:
             print 'Create Offline Tast Err! Message: '+ result['errmsg']
@@ -125,7 +125,7 @@ class dirYunPan:
         #result = open(sys.path[0] + '/dir.dat').read()
         result = utilsYunPan.jsonRepair(result)
         result = json.loads(result)
-        if result['errno'] == 0:
+        if int(result['errno']) == 0:
             return result['data']
         else:
             print 'Get Dir List Error, Please try again later! Message: '+ result['errmsg']
