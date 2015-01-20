@@ -1,7 +1,25 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
 """
-main.py
+命令行工具
+
+  用法: ./cli.py -o http://xxx.com/xxx.tar.gz
+
+  例子:
+        开始离线下载
+        ./cli.py -o http://xxx.com/xxx.tar.gz
+        ./cli.py --offline="http://xxx.com/xxx.tar.gz"
+
+  -h, --help 查看帮助
+  -o, --offline 开始离线下载
+  -t, --task 查看离线下载队列
+
+360yunpan - 360YunPan Command-line tools, support: Linux Mac Windows 
+Licensed under the MIT license:
+  http://www.opensource.org/licenses/mit-license.php
+Project home:
+  https://github.com/logbird/360yunpan
+Version:  1.0.0
 
 @Author logbird@126.com
 """

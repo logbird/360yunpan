@@ -2,6 +2,13 @@
 """
 tools
 
+360yunpan - 360YunPan Command-line tools, support: Linux Mac Windows 
+Licensed under the MIT license:
+  http://www.opensource.org/licenses/mit-license.php
+Project home:
+  https://github.com/logbird/360yunpan
+Version:  1.0.0
+
 @Author logbird@126.com
 """
 import sys
