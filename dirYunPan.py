@@ -165,15 +165,43 @@ class dirYunPan:
         result = urllib2.urlopen(reqArgs).read()
         result = json.loads(result)
         # 这里需要做一些验证
-        result = urllib2.urlopen(result['data']['download_url']).read();
         fname = self.pathYunPan + fname
         fname = fname.decode()
+        '''
+        result = urllib2.urlopen(result['data']['download_url']).read();
         if utilsYunPan.isText(result[0:512]):
             print "Download File: " + fname + " type: ASCII"
             open(fname, 'w').write(result)
         else:
             print "Download File: " + fname + " type: Binary"
             open(fname, 'wb').write(result)
+        '''
+        if result.has_key('data'):
+            self.downloadBigFile(result['data']['download_url'], fname)
+        else:
+            pass
+
+    def downloadBigFile(self, url, fname):
+        u = urllib2.urlopen(url)
+        f = open(fname, 'wb')
+        meta = u.info()
+        file_size = int(meta.getheaders("Content-Length")[0])
+        print "Downloading: %s Bytes: %s" % (fname, file_size)
+
+        file_size_dl = 0
+        block_sz = 8192
+        while True:
+            buffer = u.read(block_sz)
+            if not buffer:
+                break
+
+            file_size_dl += len(buffer)
+            f.write(buffer)
+            status = r"%10d  [%3.2f%%]" % (file_size_dl, file_size_dl * 100. / file_size)
+            status = status + chr(8)*(len(status)+1)
+            print status,
+
+        f.close()
 
     def downloadDirTree(self, path = '/', force = False):
         dirTreeName = utilsYunPan.getConfig('tmpDir') + '/dirTree.dat'
