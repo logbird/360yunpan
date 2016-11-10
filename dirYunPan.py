@@ -30,17 +30,18 @@ from loginYunPan import loginYunPan
 
 class dirYunPan:
 
-    serverAddr = None
+    serverAddr = "http://c-t.yunpan.360.cn/" 
     pathYunPan = None
     directoryTree = None
 
-    def __init__(self, pathYunPan, serverAddr):
+    def __init__(self, pathYunPan, serverAddr = None):
         '''构造函数
             
             pathYunPan String 本地云盘的绝对路径
             serverAddr String 登陆成功后 loginYunPan的serverAddr属性
         '''
-        self.serverAddr = serverAddr
+        if serverAddr != None:
+            self.serverAddr = serverAddr
         self.pathYunPan = pathYunPan
         self.mkdir(pathYunPan)
 
@@ -176,6 +177,7 @@ class dirYunPan:
 
     def downloadDirTree(self, path = '/', force = False):
         dirTreeName = utilsYunPan.getConfig('tmpDir') + '/dirTree.dat'
+        self.mkdir(self.pathYunPan + path)
         tree = []
         if os.path.exists(dirTreeName):
             tree = open(dirTreeName).read()

@@ -69,12 +69,12 @@ def login(user, pwd):
     return login, userinfo
 
 def offlineDownload(loginObj, url):
-    dir = dirYunPan('/', loginObj.serverAddr)
+    dir = dirYunPan('/')
     result = dir.offlineDownload("http://todeer.sinaapp.com/include/lib/js/common_tpl.js");
     print result['task_id']
 
 def offlineList(loginObj):
-    dir = dirYunPan('/', loginObj.serverAddr)
+    dir = dirYunPan('/')
     result = dir.offlineList();
     task_list = {}
     if result.has_key('offline_task_list'):
@@ -104,8 +104,8 @@ def runCommand(conf, user, pwd):
 
 
 if __name__ == '__main__':
-    username = '账号'
-    password = '密码'
+    username = 'username'
+    password = 'password'
     # 初始化 命令行参数
     conf = runCommand(conf, username, password)
     sys.exit()
