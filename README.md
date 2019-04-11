@@ -27,3 +27,5 @@
 
 ##目标：
 * 实现跨平台的360云盘命令行工具
+
+[![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
